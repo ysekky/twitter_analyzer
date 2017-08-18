@@ -18,7 +18,7 @@ class textanalysis:
       self.m = MeCab.Tagger('')
     
   # テキストを形態素解析し辞書のリストを返す関数
-  def get_diclist(text):
+  def get_diclist(self, text):
     parsed = self.m.parse(text)      # 形態素解析結果（改行を含む文字列として得られる）
     lines = parsed.split('\n')  # 解析結果を1行（1語）ごとに分けてリストにする
     lines = lines[0:-2]         # MeCabの返す後ろ2行は不要なので削除
@@ -30,7 +30,7 @@ class textanalysis:
     return self.diclist
 
   # 形態素解析結果の単語ごとのdictデータにPN値を追加する関数
-  def add_pnvalue(diclist_old):
+  def add_pnvalue(self, diclist_old):
     self.diclist_new = []
     for word in diclist_old:
       base = word['BaseForm']        # 個々の辞書から基本形を取得
@@ -43,7 +43,7 @@ class textanalysis:
     return self.diclist_new
 
   # 各ツイートのPN平均値を求める
-  def get_mean(dictlist):
+  def get_mean(self, dictlist):
     pn_list = []
     for word in dictlist:
       pn = word['PN']
